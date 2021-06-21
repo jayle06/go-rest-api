@@ -65,3 +65,14 @@ func UpdateProductById(c *fiber.Ctx) error {
 	return c.JSON(service.UpdateProductById(int64(id), product))
 }
 
+func GetPriceBeforeUpdateById(c *fiber.Ctx) error {
+	id, err := c.ParamsInt("id")
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"message": "Cannot parse JSON",
+			"error":   err,
+		})
+	}
+	return c.JSON(service.GetPriceBeforeUpdateById(int64(id)))
+}
