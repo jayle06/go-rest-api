@@ -19,7 +19,6 @@ func ConfigProductRouter(router *fiber.Router) {
 	(*router).Get("/products/:id", controller.GetProductById)
 	(*router).Put("/products/:id", controller.UpdateProductById)
 	(*router).Delete("/products/:id", controller.DeleteProductById)
-	(*router).Get("/products/:id/history-prices", controller.GetPriceBeforeUpdateById)
 }
 
 func ConfigReviewRouter(router *fiber.Router) {

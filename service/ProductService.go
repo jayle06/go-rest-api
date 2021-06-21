@@ -25,10 +25,10 @@ func DeleteProductById(id int64) {
 	_ = repository.Products.DeleteProductById(id)
 }
 
-func UpdateProductById(id int64, product *entity.Product) *entity.Product {
-	GetPriceBeforeUpdateById(id)
+func UpdateProductById(id int64, product *entity.Product) (*entity.Product, *dto.ProductDto) {
+	productDto := GetPriceBeforeUpdateById(id)
 	updatedProduct, _ := repository.Products.UpdateProductById(id, product)
-	return UpdateProductRating(updatedProduct)
+	return UpdateProductRating(updatedProduct), productDto
 }
 
 func UpdateProductRating(product *entity.Product) *entity.Product {
