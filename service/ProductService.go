@@ -27,6 +27,7 @@ func DeleteProductById(id int64) {
 
 func UpdateProductById(id int64, product *entity.Product) (*entity.Product, *dto.ProductDto) {
 	productDto := GetPriceBeforeUpdateById(id)
+	repository.ProductsDto.CreateProductDto(productDto)
 	updatedProduct, _ := repository.Products.UpdateProductById(id, product)
 	return UpdateProductRating(updatedProduct), productDto
 }
@@ -57,4 +58,9 @@ func GetPriceBeforeUpdateById(id int64) (result *dto.ProductDto) {
 	result.ProductPrice = product.Price
 	result.CreatedAt = time.Now().Unix()
 	return result
+}
+
+func GetPrices(id int64) *dto.ProductDto {
+	price, _ := repository.ProductsDto.FindProductDtoById(id)
+	return price
 }
